@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { h } from 'vue'
 import { RouterLink } from 'vue-router'
-import type { RouteRecordRaw } from "vue-router";
-import { NMenu, MenuOption } from 'naive-ui';
+import type { RouteRecordRaw } from 'vue-router'
+import { NMenu, MenuOption } from 'naive-ui'
 
 import { routes } from '@/router/routes'
 
@@ -18,15 +18,13 @@ const menuOptions: MenuOption[] = routes.map((route: RouteRecordRaw) => {
         },
         { default: () => route.name }
       ),
-    key: route.path,
+    key: route.path
   }
 })
 
 const handleUpdateValue = (path: string) => {
   console.log(path)
 }
-
-
 </script>
 <template>
   <div class="sidebar">

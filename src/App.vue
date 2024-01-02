@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import SideBar from '@/components/sidebar/index.vue'
 import { NButton } from 'naive-ui'
-
 </script>
 
 <template>
   <div class="view">
-  <SideBar class="left" />
-  <div class="right">
-    <n-button>naive-ui</n-button>
-    <RouterView></RouterView>
+    <SideBar class="left" />
+    <div class="right">
+      <n-button>naive-ui</n-button>
+      <RouterView></RouterView>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
