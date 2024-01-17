@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { NMenu, MenuOption } from 'naive-ui'
 
-import { routes } from '@/router/routes'
+import { routes } from '~/router/routes'
 
 const menuOptions: MenuOption[] = routes.map((route: RouteRecordRaw) => {
   return {
@@ -29,6 +29,7 @@ const handleUpdateValue = (path: string) => {
 <template>
   <div class="sidebar">
     <n-menu
+      :collapsed-width="0"
       :collapse="true"
       :default-openeds="['/dashboard']"
       :default-active="['/dashboard']"
