@@ -25,6 +25,13 @@ import locale500 from '@/views/exception/500/locale/zh-CN';
 import localeUserInfo from '@/views/user/info/locale/zh-CN';
 import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 /** simple end */
+
+import localeManageUser from '@/views/manage/user/locale/zh-CN';
+import localeManageTag from '@/views/manage/tag/locale/zh-CN';
+import localeManageNote from '@/views/manage/note/locale/zh-CN';
+import localeManageNotice from '@/views/manage/notice/locale/zh-CN';
+import localeManageComment from '@/views/manage/comment/locale/zh-CN';
+
 import localeSettings from './zh-CN/settings';
 
 export default {
@@ -43,6 +50,12 @@ export default {
   'menu.faq': '常见问题',
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
+  'menu.manage': '管理页',
+  ...localeManageUser,
+  ...localeManageTag,
+  ...localeManageNote,
+  ...localeManageNotice,
+  ...localeManageComment,
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,

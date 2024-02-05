@@ -24,6 +24,13 @@ import locale500 from '@/views/exception/500/locale/en-US';
 import localeUserInfo from '@/views/user/info/locale/en-US';
 import localeUserSetting from '@/views/user/setting/locale/en-US';
 /** simple end */
+
+import localeManageUser from '@/views/manage/user/locale/en-US';
+import localeManageTag from '@/views/manage/tag/locale/en-US';
+import localeManageNote from '@/views/manage/note/locale/en-US';
+import localeManageNotice from '@/views/manage/notice/locale/en-US';
+import localeManageComment from '@/views/manage/comment/locale/en-US';
+
 import localeSettings from './en-US/settings';
 
 export default {
@@ -42,6 +49,12 @@ export default {
   'menu.faq': 'FAQ',
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
+  'menu.manage': 'Manage Page',
+  ...localeManageUser,
+  ...localeManageTag,
+  ...localeManageNote,
+  ...localeManageNotice,
+  ...localeManageComment,
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,

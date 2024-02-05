@@ -8,7 +8,7 @@ import { MockParams } from '@/types/mock';
 import { isLogin } from '@/utils/auth';
 
 setupMock({
-  mock: false, // 关闭下面的这些 mock
+  // mock: false, // 关闭下面的这些 mock
   setup() {
     // Mock.XHR.prototype.withCredentials = true;
 
