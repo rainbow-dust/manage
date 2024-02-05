@@ -3,19 +3,13 @@ import localeLogin from '@/views/login/locale/en-US';
 
 import localeWorkplace from '@/views/dashboard/workplace/locale/en-US';
 /** simple */
-import localeSearchTable from '@/views/list/search-table/locale/en-US';
-import localeCardList from '@/views/list/card/locale/en-US';
+import localeCardList from '@/views/system-setting/card/locale/en-US';
 
-import localeStepForm from '@/views/form/step/locale/en-US';
-import localeGroupForm from '@/views/form/group/locale/en-US';
-
+import localeStepForm from '@/views/system-setting/step/locale/en-US';
 import localeBasicProfile from '@/views/profile/basic/locale/en-US';
 
-import localeDataAnalysis from '@/views/visualization/data-analysis/locale/en-US';
+import localeDataAnalysis from '@/views/dashboard/data-analysis/locale/en-US';
 // import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
-
-import localeSuccess from '@/views/result/success/locale/en-US';
-import localeError from '@/views/result/error/locale/en-US';
 
 import locale403 from '@/views/exception/403/locale/en-US';
 import locale404 from '@/views/exception/404/locale/en-US';
@@ -50,6 +44,7 @@ export default {
   'navbar.docs': 'Docs',
   'navbar.action.locale': 'Switch to English',
   'menu.manage': 'Manage Page',
+  'menu.system-setting': 'System Setting',
   ...localeManageUser,
   ...localeManageTag,
   ...localeManageNote,
@@ -60,15 +55,11 @@ export default {
   ...localeLogin,
   ...localeWorkplace,
   /** simple */
-  ...localeSearchTable,
   ...localeCardList,
   ...localeStepForm,
-  ...localeGroupForm,
   ...localeBasicProfile,
   ...localeDataAnalysis,
   // ...localeMultiDAnalysis,
-  ...localeSuccess,
-  ...localeError,
   ...locale403,
   ...locale404,
   ...locale500,

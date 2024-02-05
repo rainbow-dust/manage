@@ -22,6 +22,27 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'data-analysis',
+      name: 'DataAnalysis',
+      component: () => import('@/views/dashboard/data-analysis/index.vue'),
+      meta: {
+        locale: 'menu.visualization.dataAnalysis',
+        requiresAuth: true,
+        roles: ['admin'],
+      },
+    },
+    {
+      path: 'multi-dimension-data-analysis',
+      name: 'MultiDimensionDataAnalysis',
+      component: () =>
+        import('@/views/dashboard/multi-dimension-data-analysis/index.vue'),
+      meta: {
+        locale: 'menu.visualization.multiDimensionDataAnalysis',
+        requiresAuth: true,
+        roles: ['admin'],
+      },
+    },
     /** simple end */
   ],
 };

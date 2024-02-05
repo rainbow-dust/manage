@@ -27,6 +27,7 @@ axios.interceptors.request.use(
         config.headers = {};
       }
       config.headers.Authorization = `Bearer ${token}`;
+      // 原来你也正好用 bearer token...
     }
     return config;
   },
