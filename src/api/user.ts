@@ -18,8 +18,8 @@ export function logout() {
   return axios.post<LoginRes>('/api/user/logout');
 }
 
-export function getUserInfo() {
-  return axios.post<UserState>('/api/user/info');
+export function getUserInfo(username: string) {
+  return axios.get<UserState>(`/api/user/info/${username}`);
 }
 
 export function getMenuList() {

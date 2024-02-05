@@ -36,6 +36,7 @@ module.exports = {
     },
   },
   rules: {
+    'no-underscore-dangle': 0, // Allow _var
     'prettier/prettier': 1,
     // Vue: Recommended rules to be closed or modify
     'vue/require-default-prop': 0,

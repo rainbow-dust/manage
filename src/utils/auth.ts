@@ -16,4 +16,12 @@ const clearToken = () => {
   localStorage.removeItem(TOKEN_KEY);
 };
 
-export { isLogin, getToken, setToken, clearToken };
+const setUsername = (username: string) => {
+  localStorage.setItem('username', username);
+};
+
+const getUsername = () => {
+  return localStorage.getItem('username');
+};
+
+export { isLogin, getToken, setToken, clearToken, setUsername, getUsername };
