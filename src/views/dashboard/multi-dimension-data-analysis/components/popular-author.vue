@@ -58,6 +58,7 @@
     try {
       setLoading(true);
       const { data } = await queryPopularAuthor();
+      console.log(data);
       tableData.value = data;
     } catch (err) {
       // you can report use errorHandler or other

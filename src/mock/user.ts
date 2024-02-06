@@ -82,10 +82,10 @@ setupMock({
           },
           children: [
             {
-              path: 'workplace',
-              name: 'Workplace',
+              path: 'multi-dimension-data-analysis',
+              name: 'MultiDimensionDataAnalysis',
               meta: {
-                locale: 'menu.server.workplace',
+                locale: 'menu.visualization.multiDimensionDataAnalysis',
                 requiresAuth: true,
               },
             },

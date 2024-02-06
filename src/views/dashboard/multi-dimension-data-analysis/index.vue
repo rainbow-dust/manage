@@ -20,6 +20,9 @@
       </a-grid>
       <DataChainGrowth />
       <ContentPublishingSource />
+      <PopularAuthor />
+      <ContentPeriodAnalysis />
+      <PopularContent />
     </a-space>
   </div>
 </template>
@@ -29,7 +32,9 @@
   import DataChainGrowth from './components/data-chain-growth.vue';
   import UserActions from './components/user-actions.vue';
   import ContentTypeDistribution from './components/content-type-distribution.vue';
-  import ContentPublishingSource from './components/content-publishing-source.vue';
+  import PopularAuthor from './components/popular-author.vue';
+  import ContentPeriodAnalysis from './components/content-period-analysis.vue';
+  import PopularContent from './components/popular-content.vue';
 </script>
 
 <script lang="ts">

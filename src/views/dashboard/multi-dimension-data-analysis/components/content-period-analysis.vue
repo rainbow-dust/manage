@@ -190,6 +190,7 @@
     setLoading(true);
     try {
       const { data: chartData } = await queryContentPeriodAnalysis();
+      console.log(chartData);
       xAxis.value = chartData.xAxis;
       chartData.data.forEach((el) => {
         if (el.name === '纯文本') {

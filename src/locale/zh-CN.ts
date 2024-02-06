@@ -1,7 +1,6 @@
 import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 
-import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
 /** simple */
 
 import localeCardList from '@/views/system-setting/card/locale/zh-CN';
@@ -9,7 +8,6 @@ import localeStepForm from '@/views/system-setting/step/locale/zh-CN';
 
 import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
 
-import localeDataAnalysis from '@/views/dashboard/data-analysis/locale/zh-CN';
 import localeMultiDAnalysis from '@/views/dashboard/multi-dimension-data-analysis/locale/zh-CN';
 
 import locale403 from '@/views/exception/403/locale/zh-CN';
@@ -54,12 +52,10 @@ export default {
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,
-  ...localeWorkplace,
   /** simple */
   ...localeCardList,
   ...localeStepForm,
   ...localeBasicProfile,
-  ...localeDataAnalysis,
   ...localeMultiDAnalysis,
   ...locale403,
   ...locale404,
