@@ -264,6 +264,7 @@
     setLoading(true);
     try {
       const { data } = await queryDataOverview();
+      console.log(data);
       xAxis.value = data.xAxis;
       data.data.forEach((el) => {
         if (el.name === '内容生产量') {
