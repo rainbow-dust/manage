@@ -96,7 +96,7 @@
   });
   const fetchData = async (params: DataChainGrowth) => {
     try {
-      const { data } = await queryDataChainGrowth(params);
+      const data = await queryDataChainGrowth(params);
       const { chartData: resChartData } = data;
       count.value = data.count;
       growth.value = data.growth;

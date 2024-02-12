@@ -49,8 +49,7 @@
   const activityList = ref<LatestActivity[]>(new Array(7).fill({}));
   const fetchData = async () => {
     try {
-      const { data } = await queryLatestActivity();
-      activityList.value = data;
+      activityList.value = await queryLatestActivity();
     } catch (err) {
       // you can report use errorHandler or other
     } finally {
@@ -68,17 +67,21 @@
       justify-content: space-between;
     }
   }
+
   .general-card :deep(.arco-list-item) {
     padding-left: 0;
     border-bottom: none;
+
     .arco-list-item-meta-content {
       flex: 1;
       padding-bottom: 27px;
       border-bottom: 1px solid var(--color-neutral-3);
     }
+
     .arco-list-item-meta-avatar {
       padding-bottom: 27px;
     }
+
     .skeleton-item {
       margin-top: 10px;
       padding-bottom: 20px;

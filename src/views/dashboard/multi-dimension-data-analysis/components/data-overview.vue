@@ -263,7 +263,7 @@
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data } = await queryDataOverview();
+      const data = await queryDataOverview();
       console.log(data);
       xAxis.value = data.xAxis;
       data.data.forEach((el) => {

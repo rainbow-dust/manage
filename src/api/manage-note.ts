@@ -20,7 +20,9 @@ export interface PolicyParams extends Partial<PolicyRecord> {
 
 export interface PolicyListRes {
   list: PolicyRecord[];
+  noteList: [];
   total: number;
+  totalCount?: number;
 }
 
 export function queryPolicyList(params: PolicyParams) {

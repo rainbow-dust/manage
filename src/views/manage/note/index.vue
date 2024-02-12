@@ -354,10 +354,10 @@
   ) => {
     setLoading(true);
     try {
-      const res = await queryPolicyList(params);
-      renderData.value = res.noteList;
+      const data = await queryPolicyList(params);
+      renderData.value = data.noteList;
       pagination.current = params.pageCurrent;
-      pagination.total = res.totalCount;
+      pagination.total = data.totalCount;
     } catch (err) {
       // you can report use errorHandler or other
     } finally {

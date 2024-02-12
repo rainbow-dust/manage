@@ -1,9 +1,19 @@
-import { defineComponent } from 'vue';
+import { defineComponent, DefineComponent } from 'vue';
 import type { RouteMeta, NavigationGuard } from 'vue-router';
+
+// declare module '*.vue' {
+//   import { DefineComponent } from 'vue';
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+//   const component: DefineComponent<{}, {}, any>;
+//   export default component;
+// }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+let component: DefineComponent<{}, {}, any>;
 
 export type Component<T = any> =
   | ReturnType<typeof defineComponent>
-  | (() => Promise<typeof import('*.vue')>)
+  | (() => Promise<typeof component>)
   | (() => Promise<T>);
 
 export interface AppRouteRecordRaw {

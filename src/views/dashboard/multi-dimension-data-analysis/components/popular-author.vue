@@ -57,9 +57,7 @@
   const fetchData = async () => {
     try {
       setLoading(true);
-      const { data } = await queryPopularAuthor();
-      console.log(data);
-      tableData.value = data;
+      tableData.value = await queryPopularAuthor();
     } catch (err) {
       // you can report use errorHandler or other
     } finally {
