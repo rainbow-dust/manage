@@ -12,45 +12,21 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item
-                  field="number"
-                  :label="$t('searchTable.form.number')"
-                >
+                <a-form-item field="_id" :label="$t('searchTable.form.number')">
                   <a-input
-                    v-model="formModel.number"
+                    v-model="formModel._id"
                     :placeholder="$t('searchTable.form.number.placeholder')"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="name" :label="$t('searchTable.form.name')">
+                <a-form-item
+                  field="content"
+                  :label="$t('searchTable.form.content')"
+                >
                   <a-input
-                    v-model="formModel.name"
-                    :placeholder="$t('searchTable.form.name.placeholder')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
-                  field="contentType"
-                  :label="$t('searchTable.form.contentType')"
-                >
-                  <a-select
-                    v-model="formModel.contentType"
-                    :options="contentTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
-                  field="filterType"
-                  :label="$t('searchTable.form.filterType')"
-                >
-                  <a-select
-                    v-model="formModel.filterType"
-                    :options="filterTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
+                    v-model="formModel.content"
+                    :placeholder="$t('searchTable.form.content.placeholder')"
                   />
                 </a-form-item>
               </a-col>
@@ -121,6 +97,12 @@
           :span="12"
           style="display: flex; align-items: center; justify-content: end"
         >
+          <a-button>
+            <template #icon>
+              <icon-download />
+            </template>
+            {{ $t('searchTable.operation.download') }}
+          </a-button>
           <a-tooltip :content="$t('searchTable.actions.refresh')">
             <div class="action-icon" @click="search"
               ><icon-refresh size="18"
@@ -137,7 +119,7 @@
                 :value="item.value"
                 :class="{ active: item.value === size }"
               >
-                <span>{{ item.name }}</span>
+                <span>{{ item.content }}</span>
               </a-doption>
             </template>
           </a-dropdown>
@@ -196,8 +178,11 @@
           {{ $t(`searchTable.form.status.${record.status}`) }}
         </template>
         <template #operations>
-          <a-button v-permission="['admin']" type="text" size="small">
+          <a-button type="text" size="small">
             {{ $t('searchTable.columns.operations.view') }}
+          </a-button>
+          <a-button v-permission="['admin']" type="text" size="small">
+            更新
           </a-button>
         </template>
       </a-table>
@@ -210,9 +195,9 @@
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
   import {
-    queryPolicyList,
-    PolicyRecord,
-    PolicyParams,
+    queryCommentList,
+    CommentRecord,
+    CommentParams,
   } from '@/api/manage-comment';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
@@ -225,8 +210,10 @@
 
   const generateFormModel = () => {
     return {
-      number: '',
-      name: '',
+      // number: '',
+      // content: '',
+      _id: '',
+      content: '',
       contentType: '',
       filterType: '',
       createdTime: [],
@@ -235,7 +222,7 @@
   };
   const { loading, setLoading } = useLoading(true);
   const { t } = useI18n();
-  const renderData = ref<PolicyRecord[]>([]);
+  const renderData = ref<CommentRecord[]>([]);
   const formModel = ref(generateFormModel());
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
@@ -251,19 +238,19 @@
   });
   const densityList = computed(() => [
     {
-      name: t('searchTable.size.mini'),
+      content: t('searchTable.size.mini'),
       value: 'mini',
     },
     {
-      name: t('searchTable.size.small'),
+      content: t('searchTable.size.small'),
       value: 'small',
     },
     {
-      name: t('searchTable.size.medium'),
+      content: t('searchTable.size.medium'),
       value: 'medium',
     },
     {
-      name: t('searchTable.size.large'),
+      content: t('searchTable.size.large'),
       value: 'large',
     },
   ]);
@@ -278,17 +265,8 @@
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.name'),
-      dataIndex: 'title',
-    },
-    {
-      title: t('searchTable.columns.contentType'),
-      dataIndex: 'contentType',
-      slotName: 'contentType',
-    },
-    {
-      title: t('searchTable.columns.filterType'),
-      dataIndex: 'filterType',
+      title: t('searchTable.columns.content'),
+      dataIndex: 'content',
     },
     {
       title: t('searchTable.columns.count'),
@@ -309,46 +287,27 @@
       slotName: 'operations',
     },
   ]);
-  const contentTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('searchTable.form.contentType.img'),
-      value: 'img',
-    },
-    {
-      label: t('searchTable.form.contentType.horizontalVideo'),
-      value: 'horizontalVideo',
-    },
-    {
-      label: t('searchTable.form.contentType.verticalVideo'),
-      value: 'verticalVideo',
-    },
-  ]);
-  const filterTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('searchTable.form.filterType.artificial'),
-      value: 'artificial',
-    },
-    {
-      label: t('searchTable.form.filterType.rules'),
-      value: 'rules',
-    },
-  ]);
+
   const statusOptions = computed<SelectOptionData[]>(() => [
     {
-      label: t('searchTable.form.status.online'),
-      value: 'online',
+      label: t('searchTable.form.status.normal'),
+      value: 'normal',
     },
     {
-      label: t('searchTable.form.status.offline'),
-      value: 'offline',
+      label: t('searchTable.form.status.deleted'),
+      value: 'abnormal',
+    },
+    {
+      label: t('searchTable.form.status.blocked'),
+      value: 'blocked',
     },
   ]);
   const fetchData = async (
-    params: PolicyParams = { pageCurrent: 1, pageSize: 20 }
+    params: CommentParams = { pageCurrent: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
-      const data = await queryPolicyList(params);
+      const data = await queryCommentList(params);
       renderData.value = data.list;
       pagination.current = params.pageCurrent;
       pagination.total = data.totalCount;
@@ -365,7 +324,7 @@
       pageCurrent: basePagination.current,
       pageSize: basePagination.pageSize,
       ...formModel.value,
-    } as unknown as PolicyParams);
+    } as unknown as CommentParams);
   };
   const onPageChange = (current: number) => {
     fetchData({ ...basePagination, pageCurrent: current });
@@ -445,7 +404,7 @@
 
 <script lang="ts">
   export default {
-    name: 'SearchTable',
+    name: 'ManageComment',
   };
 </script>
 

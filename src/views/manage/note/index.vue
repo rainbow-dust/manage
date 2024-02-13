@@ -215,11 +215,7 @@
   import { computed, ref, reactive, watch, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import {
-    queryPolicyList,
-    PolicyRecord,
-    PolicyParams,
-  } from '@/api/manage-note';
+  import { queryNoteList, NoteRecord, NoteParams } from '@/api/manage-note';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
@@ -241,7 +237,7 @@
   };
   const { loading, setLoading } = useLoading(true);
   const { t } = useI18n();
-  const renderData = ref<PolicyRecord[]>([]);
+  const renderData = ref<NoteRecord[]>([]);
   const formModel = ref(generateFormModel());
   const cloneColumns = ref<Column[]>([]);
   const showColumns = ref<Column[]>([]);
@@ -350,11 +346,11 @@
     },
   ]);
   const fetchData = async (
-    params: PolicyParams = { pageCurrent: 1, pageSize: 20 }
+    params: NoteParams = { pageCurrent: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
-      const data = await queryPolicyList(params);
+      const data = await queryNoteList(params);
       renderData.value = data.noteList;
       pagination.current = params.pageCurrent;
       pagination.total = data.totalCount;
@@ -371,7 +367,7 @@
       pageCurrent: basePagination.current,
       pageSize: basePagination.pageSize,
       ...formModel.value,
-    } as unknown as PolicyParams);
+    } as unknown as NoteParams);
   };
   const onPageChange = (current: number) => {
     fetchData({ ...basePagination, pageCurrent: current });
@@ -451,7 +447,7 @@
 
 <script lang="ts">
   export default {
-    name: 'SearchTable',
+    name: 'ManageNote',
   };
 </script>
 

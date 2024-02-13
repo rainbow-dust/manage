@@ -23,7 +23,6 @@ export interface UserParams extends Partial<UserRecord> {
 
 export interface UserListRes {
   list: UserRecord[];
-  noteList: [];
   totalCount?: number;
 }
 

@@ -1,55 +1,23 @@
 import axios from 'axios';
-import qs from 'query-string';
-import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
 
-export interface PolicyRecord {
+export interface NoteRecord {
   id: string;
   number: number;
   name: string;
-  contentType: 'img' | 'horizontalVideo' | 'verticalVideo';
-  filterType: 'artificial' | 'rules';
-  count: number;
-  status: 'online' | 'offline';
-  createdTime: string;
 }
 
-export interface PolicyParams extends Partial<PolicyRecord> {
+export interface NoteParams extends Partial<NoteRecord> {
   pageCurrent: number;
   pageSize: number;
 }
 
-export interface PolicyListRes {
-  list: PolicyRecord[];
-  noteList: [];
-  total: number;
+export interface NoteListRes {
+  noteList: NoteRecord[];
   totalCount?: number;
 }
 
-export function queryPolicyList(params: PolicyParams) {
-  return axios.post<PolicyListRes>('/api/note/query/list', {
+export function queryNoteList(params: NoteParams) {
+  return axios.post<NoteListRes>('/api/note/query/list', {
     ...params,
   });
-}
-
-export interface ServiceRecord {
-  id: number;
-  title: string;
-  description: string;
-  name?: string;
-  actionType?: string;
-  icon?: string;
-  data?: DescData[];
-  enable?: boolean;
-  expires?: boolean;
-}
-export function queryInspectionList() {
-  return axios.get('/api/note/quality-inspection');
-}
-
-export function queryTheServiceList() {
-  return axios.get('/api/note/the-service');
-}
-
-export function queryRulesPresetList() {
-  return axios.get('/api/note/rules-preset');
 }

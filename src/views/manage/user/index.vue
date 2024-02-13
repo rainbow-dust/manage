@@ -400,7 +400,7 @@
 
 <script lang="ts">
   export default {
-    name: 'SearchTable',
+    name: 'ManageUser',
   };
 </script>
 
