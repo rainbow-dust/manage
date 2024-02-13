@@ -29,6 +29,21 @@ axios.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
       // 原来你也正好用 bearer token...
     }
+
+    // Post request data clear empty value
+    if (config.method === 'post') {
+      const { data } = config;
+      Object.keys(data).forEach((key) => {
+        if (
+          data[key] === undefined ||
+          data[key] === null ||
+          data[key] === '' ||
+          (Array.isArray(data[key]) && !data[key].length)
+        ) {
+          delete data[key];
+        }
+      });
+    }
     return config;
   },
   (error) => {

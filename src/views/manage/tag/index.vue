@@ -196,40 +196,6 @@
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
         </template>
-        <template #contentType="{ record }">
-          <a-space>
-            <a-avatar
-              v-if="record.contentType === 'img'"
-              :size="16"
-              shape="square"
-            >
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/581b17753093199839f2e327e726b157.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            <a-avatar
-              v-else-if="record.contentType === 'horizontalVideo'"
-              :size="16"
-              shape="square"
-            >
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/77721e365eb2ab786c889682cbc721c1.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            <a-avatar v-else :size="16" shape="square">
-              <img
-                alt="avatar"
-                src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/ea8b09190046da0ea7e070d83c5d1731.svg~tplv-49unhts6dw-image.image"
-              />
-            </a-avatar>
-            {{ $t(`searchTable.form.contentType.${record.contentType}`) }}
-          </a-space>
-        </template>
-        <template #filterType="{ record }">
-          {{ $t(`searchTable.form.filterType.${record.filterType}`) }}
-        </template>
         <template #status="{ record }">
           <span v-if="record.status === 'offline'" class="circle"></span>
           <span v-else class="circle pass"></span>
@@ -249,7 +215,11 @@
   import { computed, ref, reactive, watch, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { queryPolicyList, PolicyRecord, PolicyParams } from '@/api/list';
+  import {
+    queryPolicyList,
+    PolicyRecord,
+    PolicyParams,
+  } from '@/api/manage-tag';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
@@ -311,11 +281,11 @@
     },
     {
       title: t('searchTable.columns.number'),
-      dataIndex: 'number',
+      dataIndex: '_id',
     },
     {
       title: t('searchTable.columns.name'),
-      dataIndex: 'name',
+      dataIndex: 'title',
     },
     {
       title: t('searchTable.columns.contentType'),
@@ -332,7 +302,7 @@
     },
     {
       title: t('searchTable.columns.createdTime'),
-      dataIndex: 'createdTime',
+      dataIndex: 'created_at',
     },
     {
       title: t('searchTable.columns.status'),
@@ -380,14 +350,14 @@
     },
   ]);
   const fetchData = async (
-    params: PolicyParams = { current: 1, pageSize: 20 }
+    params: PolicyParams = { pageCurrent: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
       const data = await queryPolicyList(params);
       renderData.value = data.list;
-      pagination.current = params.current;
-      pagination.total = data.total;
+      pagination.current = params.pageCurrent;
+      pagination.total = data.totalCount;
     } catch (err) {
       // you can report use errorHandler or other
     } finally {
@@ -397,12 +367,14 @@
 
   const search = () => {
     fetchData({
-      ...basePagination,
+      // ...basePagination,
+      pageCurrent: basePagination.current,
+      pageSize: basePagination.pageSize,
       ...formModel.value,
     } as unknown as PolicyParams);
   };
   const onPageChange = (current: number) => {
-    fetchData({ ...basePagination, current });
+    fetchData({ ...basePagination, pageCurrent: current });
   };
 
   fetchData();

@@ -14,21 +14,19 @@ export interface PolicyRecord {
 }
 
 export interface PolicyParams extends Partial<PolicyRecord> {
-  current: number;
+  pageCurrent: number;
   pageSize: number;
 }
 
 export interface PolicyListRes {
   list: PolicyRecord[];
-  total: number;
+  noteList: [];
+  totalCount?: number;
 }
 
 export function queryPolicyList(params: PolicyParams) {
-  return axios.get<PolicyListRes>('/api/list/policy', {
-    params,
-    paramsSerializer: (obj) => {
-      return qs.stringify(obj);
-    },
+  return axios.post<PolicyListRes>('/api/user/admin/query/list', {
+    ...params,
   });
 }
 
@@ -44,13 +42,13 @@ export interface ServiceRecord {
   expires?: boolean;
 }
 export function queryInspectionList() {
-  return axios.get('/api/list/quality-inspection');
+  return axios.get('/api/user/admin/query/list');
 }
 
 export function queryTheServiceList() {
-  return axios.get('/api/list/the-service');
+  return axios.get('/api/note/the-service');
 }
 
 export function queryRulesPresetList() {
-  return axios.get('/api/list/rules-preset');
+  return axios.get('/api/note/rules-preset');
 }
