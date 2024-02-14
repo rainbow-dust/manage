@@ -35,16 +35,6 @@
         }"
       >
         <template #label="{ label }">{{ $t(label) }} :</template>
-        <template #value="{ value, data }">
-          <a-tag
-            v-if="data.label === 'userSetting.label.certification'"
-            color="green"
-            size="small"
-          >
-            已认证
-          </a-tag>
-          <span v-else>{{ value }}</span>
-        </template>
       </a-descriptions>
     </a-space>
   </a-card>
@@ -60,32 +50,21 @@
   import { userUploadApi } from '@/api/user-center';
   import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
 
+  const env = ref(import.meta.env);
   const userStore = useUserStore();
   const file = {
     uid: '-2',
     name: 'avatar.png',
-    url: userStore.avatar,
+    url: env.value.VITE_FURINA_APP_IMG_URL + userStore.avatar,
   };
   const renderData = [
     {
       label: 'userSetting.label.name',
-      value: userStore.name,
-    },
-    {
-      label: 'userSetting.label.certification',
-      value: userStore.certification,
+      value: userStore.username,
     },
     {
       label: 'userSetting.label.accountId',
       value: userStore.accountId,
-    },
-    {
-      label: 'userSetting.label.phone',
-      value: userStore.phone,
-    },
-    {
-      label: 'userSetting.label.registrationDate',
-      value: userStore.registrationDate,
     },
   ] as DescData[];
   const fileList = ref<FileItem[]>([file]);
@@ -141,11 +120,13 @@
     padding: 14px 0 4px 4px;
     border-radius: 4px;
   }
+
   :deep(.arco-avatar-trigger-icon-button) {
     width: 32px;
     height: 32px;
     line-height: 32px;
     background-color: #e8f3ff;
+
     .arco-icon-camera {
       margin-top: 8px;
       color: rgb(var(--arcoblue-6));

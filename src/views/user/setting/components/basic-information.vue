@@ -32,68 +32,8 @@
       ]"
     >
       <a-input
-        v-model="formData.nickname"
+        v-model="formData.username"
         :placeholder="$t('userSetting.basicInfo.placeholder.nickname')"
-      />
-    </a-form-item>
-    <a-form-item
-      field="countryRegion"
-      :label="$t('userSetting.basicInfo.form.label.countryRegion')"
-      :rules="[
-        {
-          required: true,
-          message: $t('userSetting.form.error.countryRegion.required'),
-        },
-      ]"
-    >
-      <a-select
-        v-model="formData.countryRegion"
-        :placeholder="$t('userSetting.basicInfo.placeholder.area')"
-      >
-        <a-option value="China">中国</a-option>
-      </a-select>
-    </a-form-item>
-    <a-form-item
-      field="area"
-      :label="$t('userSetting.basicInfo.form.label.area')"
-      :rules="[
-        {
-          required: true,
-          message: $t('userSetting.form.error.area.required'),
-        },
-      ]"
-    >
-      <a-cascader
-        v-model="formData.area"
-        :placeholder="$t('userSetting.basicInfo.placeholder.area')"
-        :options="[
-          {
-            label: '北京',
-            value: 'beijing',
-            children: [
-              {
-                label: '北京',
-                value: 'beijing',
-                children: [
-                  {
-                    label: '朝阳',
-                    value: 'chaoyang',
-                  },
-                ],
-              },
-            ],
-          },
-        ]"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item
-      field="address"
-      :label="$t('userSetting.basicInfo.form.label.address')"
-    >
-      <a-input
-        v-model="formData.address"
-        :placeholder="$t('userSetting.basicInfo.placeholder.address')"
       />
     </a-form-item>
     <a-form-item
@@ -133,10 +73,7 @@
   const formRef = ref<FormInstance>();
   const formData = ref<BasicInfoModel>({
     email: '',
-    nickname: '',
-    countryRegion: '',
-    area: '',
-    address: '',
+    username: '',
     profile: '',
   });
   const validate = async () => {
