@@ -76,33 +76,11 @@
       </a-row>
       <a-divider style="margin-top: 0" />
       <a-row style="margin-bottom: 16px">
-        <a-col :span="12">
-          <a-space>
-            <a-button type="primary">
-              <template #icon>
-                <icon-plus />
-              </template>
-              {{ $t('searchTable.operation.create') }}
-            </a-button>
-            <a-upload action="/">
-              <template #upload-button>
-                <a-button>
-                  {{ $t('searchTable.operation.import') }}
-                </a-button>
-              </template>
-            </a-upload>
-          </a-space>
-        </a-col>
+        <a-col :span="12"> </a-col>
         <a-col
           :span="12"
           style="display: flex; align-items: center; justify-content: end"
         >
-          <a-button>
-            <template #icon>
-              <icon-download />
-            </template>
-            {{ $t('searchTable.operation.download') }}
-          </a-button>
           <a-tooltip :content="$t('searchTable.actions.refresh')">
             <div class="action-icon" @click="search"
               ><icon-refresh size="18"
@@ -167,7 +145,8 @@
         :data="renderData"
         :bordered="false"
         :size="size"
-        @page-change="onPageChange"
+        @change="onTableChange"
+        @on-page-change="onPageChange"
       >
         <template #index="{ rowIndex }">
           {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
@@ -197,7 +176,11 @@
   import { queryUserList, UserRecord, UserParams } from '@/api/manage-user';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
-  import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
+  import type {
+    TableChangeExtra,
+    TableColumnData,
+    TableData,
+  } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
 
@@ -267,6 +250,10 @@
     {
       title: t('searchTable.columns.count'),
       dataIndex: 'count',
+      sortable: {
+        sorter: true,
+        sortDirections: ['descend'],
+      },
     },
     {
       title: t('searchTable.columns.createdTime'),
@@ -324,6 +311,26 @@
   };
   const onPageChange = (current: number) => {
     fetchData({ ...basePagination, pageCurrent: current });
+  };
+
+  const onTableChange = (
+    data: TableData[],
+    extra: TableChangeExtra,
+    currentData: TableData[]
+  ) => {
+    if (extra.type === 'sorter') {
+      fetchData({
+        pageCurrent: extra.page,
+        pageSize: extra.pageSize,
+        sort: [
+          {
+            field: extra.sorter?.field,
+            order: extra.sorter?.direction,
+          },
+        ],
+        ...formModel.value,
+      } as unknown as UserParams);
+    }
   };
 
   fetchData();

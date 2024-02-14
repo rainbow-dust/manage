@@ -151,7 +151,7 @@
             :size="32"
             :style="{ marginRight: '8px', cursor: 'pointer' }"
           >
-            <img alt="avatar" :src="avatar" />
+            <img alt="avatar" :src="env.VITE_FURINA_APP_IMG_URL + avatar" />
           </a-avatar>
           <template #content>
             <a-doption>
@@ -203,6 +203,8 @@
   import useUser from '@/hooks/user';
   import Menu from '@/components/menu/index.vue';
   import MessageBox from '../message-box/index.vue';
+
+  const env = ref(import.meta.env);
 
   const appStore = useAppStore();
   const userStore = useUserStore();

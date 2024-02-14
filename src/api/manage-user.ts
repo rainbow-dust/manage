@@ -4,9 +4,11 @@ type CollectionStatus = 'normal' | 'deleted' | 'blocked';
 export interface UserRecord {
   _id: string;
   username: string;
-  count: number;
   status: CollectionStatus;
   createdTime: string;
+  be_liked_count: number;
+  be_collected_count: number;
+  note_count: number;
 }
 
 export interface UserParams extends Partial<UserRecord> {
@@ -16,8 +18,8 @@ export interface UserParams extends Partial<UserRecord> {
   registerTime?: [string, string];
   status?: CollectionStatus;
   sort?: {
-    orderKey: string;
-    orderType: string;
+    field: string;
+    order: string;
   }[];
 }
 

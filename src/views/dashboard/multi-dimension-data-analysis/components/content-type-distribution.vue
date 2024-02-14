@@ -40,7 +40,7 @@
           { name: '财经', max: 22000 },
           { name: '科技', max: 30000 },
           { name: '其他', max: 38000 },
-          { name: '体育', max: 52000 },
+          // { name: '体育', max: 52000 },
           { name: '娱乐', max: 25000 },
         ],
         axisName: {

@@ -5,7 +5,7 @@
         <template #trigger-icon>
           <icon-camera />
         </template>
-        <img :src="userInfo.avatar" />
+        <img :src="import.meta.env.VITE_FURINA_APP_IMG_URL + userInfo.avatar" />
       </a-avatar>
       <a-typography-title :heading="6" style="margin: 0">
         {{ userInfo.name }}
@@ -45,7 +45,7 @@
     justify-content: center;
     height: 204px;
     color: var(--gray-10);
-    background: url(//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/41c6b125cc2e27021bf7fcc9a9b1897c.svg~tplv-49unhts6dw-image.image)
+    background: url('//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/41c6b125cc2e27021bf7fcc9a9b1897c.svg~tplv-49unhts6dw-image.image')
       no-repeat;
     background-size: cover;
     border-radius: 4px;
@@ -57,10 +57,12 @@
         vertical-align: -1px;
       }
     }
+
     .user-msg {
       .arco-icon {
         color: rgb(var(--gray-10));
       }
+
       .arco-typography {
         margin-left: 6px;
       }
