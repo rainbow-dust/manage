@@ -25,3 +25,7 @@ export function queryTagList(params: TagParams) {
     ...params,
   });
 }
+
+export function editTag(name: string, tag: TagRecord) {
+  return axios.post(`/api/tag/admin/edit/${name}`, tag);
+}

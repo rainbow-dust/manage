@@ -32,3 +32,11 @@ export function queryNoteList(params: NoteParams) {
     ...params,
   });
 }
+
+export function blockNote(id: string) {
+  return axios.post(`/api/note/admin/block/${id}`);
+}
+
+export function unblockNote(id: string) {
+  return axios.post(`/api/note/admin/unblock/${id}`);
+}

@@ -25,3 +25,11 @@ export function queryCommentList(params: CommentParams) {
     ...params,
   });
 }
+
+export function blockComment(id: string) {
+  return axios.post(`/api/Comment/admin/block/${id}`);
+}
+
+export function unblockComment(id: string) {
+  return axios.post(`/api/Comment/admin/unblock/${id}`);
+}

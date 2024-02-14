@@ -160,16 +160,49 @@
           <span v-else class="circle pass"></span>
           {{ $t(`searchTable.form.status.${record.status}`) }}
         </template>
-        <template #operations>
+        <template #operations="{ record }">
           <a-button type="text" size="small">
             {{ $t('searchTable.columns.operations.view') }}
           </a-button>
-          <a-button v-permission="['admin']" type="text" size="small">
-            更新
+          <a-button
+            v-permission="['admin']"
+            type="text"
+            size="small"
+            @click="handleTagEdit(record)"
+          >
+            编辑
           </a-button>
         </template>
       </a-table>
     </a-card>
+    <a-modal v-model:visible="visible" @ok="handleOk" @cancel="handleCancel">
+      <template #title> 编辑标签 </template>
+      <a-form
+        :model="editFormModel"
+        :label-col-props="{ span: 6 }"
+        :wrapper-col-props="{ span: 18 }"
+        label-align="left"
+      >
+        <a-form-item field="name" :label="t('searchTable.form.name')">
+          <a-input
+            v-model="editFormModel.name"
+            :placeholder="t('searchTable.form.name.placeholder')"
+          />
+        </a-form-item>
+        <a-form-item field="description" :label="'介绍'">
+          <a-input v-model="editFormModel.description" :placeholder="'介绍'" />
+        </a-form-item>
+        <a-form-item field="heat" :label="'热度'">
+          <a-input-number v-model="editFormModel.heat" :placeholder="'热度'" />
+        </a-form-item>
+        <a-form-item field="reference_count" :label="'被引用次数'">
+          <a-input-number
+            v-model="editFormModel.reference_count"
+            :placeholder="t('searchTable.form.reference_count.placeholder')"
+          />
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
@@ -177,12 +210,43 @@
   import { computed, ref, reactive, watch, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { queryTagList, TagRecord, TagParams } from '@/api/manage-tag';
+  import {
+    queryTagList,
+    TagRecord,
+    TagParams,
+    editTag,
+  } from '@/api/manage-tag';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
+  import { Message } from '@arco-design/web-vue';
+
+  const editFormModel = ref({
+    _id: '',
+    name: '',
+    description: '',
+    heat: 0,
+    reference_count: 0,
+    created: '',
+  });
+  const visible = ref(false);
+  const handleTagEdit = (record: TagRecord) => {
+    visible.value = true;
+    editFormModel.value = { ...record };
+  };
+  const handleOk = async () => {
+    visible.value = false;
+
+    await editTag(editFormModel.value._id, editFormModel.value);
+    Message.success('编辑成功');
+    fetchData();
+  };
+
+  const handleCancel = () => {
+    visible.value = false;
+  };
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -248,17 +312,20 @@
       dataIndex: 'name',
     },
     {
-      title: t('searchTable.columns.count'),
-      dataIndex: 'count',
+      title: '介绍',
+      dataIndex: 'description',
+    },
+    {
+      title: '热度',
+      dataIndex: 'heat',
+    },
+    {
+      title: '被引用次数',
+      dataIndex: 'reference_count',
     },
     {
       title: t('searchTable.columns.createdTime'),
-      dataIndex: 'created_at',
-    },
-    {
-      title: t('searchTable.columns.status'),
-      dataIndex: 'status',
-      slotName: 'status',
+      dataIndex: 'created',
     },
     {
       title: t('searchTable.columns.operations'),
