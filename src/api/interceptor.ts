@@ -32,6 +32,9 @@ axios.interceptors.request.use(
 
     // Post request data clear empty value
     if (config.method === 'post') {
+      if (!config.data) {
+        return config;
+      }
       const { data } = config;
       Object.keys(data).forEach((key) => {
         if (

@@ -51,7 +51,7 @@
             el.color
           }" class="tooltip-item-icon"></span><span>${el.seriesName}</span>
         </p>
-        <span class="tooltip-value">${el.value.toLocaleString()}</span>
+        <span class="tooltip-value">${el.value?.toLocaleString()}</span>
       </div>`
       )
       .reverse()
@@ -267,17 +267,19 @@
       console.log(data);
       xAxis.value = data.xAxis;
       data.data.forEach((el) => {
-        if (el.name === '内容生产量') {
+        if (el.name === '文章数') {
           contentProductionData.value = el.value;
-        } else if (el.name === '内容点击量') {
+        } else if (el.name === '点赞数') {
           contentClickData.value = el.value;
-        } else if (el.name === '内容曝光量') {
+        } else if (el.name === '阅读数') {
           contentExposureData.value = el.value;
+        } else if (el.name === '用户数') {
+          activeUsersData.value = el.value;
         }
-        activeUsersData.value = el.value;
       });
     } catch (err) {
       // you can report use errorHandler or other
+      console.error(err);
     } finally {
       setLoading(false);
     }

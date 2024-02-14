@@ -18,9 +18,9 @@
           <ContentTypeDistribution />
         </a-grid-item>
       </a-grid>
-      <PopularAuthor />
+      <!-- <PopularAuthor />
       <ContentPeriodAnalysis />
-      <PopularContent />
+      <PopularContent /> -->
     </a-space>
   </div>
 </template>

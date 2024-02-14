@@ -69,5 +69,5 @@ export interface DataOverviewRes {
 }
 
 export function queryDataOverview() {
-  return axios.post<DataOverviewRes>('/api/data-overview');
+  return axios.post<DataOverviewRes>('/api/statistics/data-overview');
 }
