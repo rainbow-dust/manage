@@ -18,7 +18,6 @@
           <ContentTypeDistribution />
         </a-grid-item>
       </a-grid>
-      <DataChainGrowth />
       <PopularAuthor />
       <ContentPeriodAnalysis />
       <PopularContent />
@@ -28,7 +27,6 @@
 
 <script lang="ts" setup>
   import DataOverview from './components/data-overview.vue';
-  import DataChainGrowth from './components/data-chain-growth.vue';
   import UserActions from './components/user-actions.vue';
   import ContentTypeDistribution from './components/content-type-distribution.vue';
   import PopularAuthor from './components/popular-author.vue';

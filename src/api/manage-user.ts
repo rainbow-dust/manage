@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Sorter } from '@/types/global';
 
 type CollectionStatus = 'normal' | 'deleted' | 'blocked';
 export interface UserRecord {
@@ -17,10 +18,7 @@ export interface UserParams extends Partial<UserRecord> {
   username?: string;
   registerTime?: [string, string];
   status?: CollectionStatus;
-  sort?: {
-    field: string;
-    order: string;
-  }[];
+  sort?: Sorter[];
 }
 
 export interface UserListRes {

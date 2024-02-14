@@ -1,4 +1,3 @@
-import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 
 /** simple */
@@ -50,7 +49,6 @@ export default {
   ...localeManageNotice,
   ...localeManageComment,
   ...localeSettings,
-  ...localeMessageBox,
   ...localeLogin,
   /** simple */
   ...localeCardList,

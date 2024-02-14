@@ -1,7 +1,6 @@
 import Mock from 'mockjs';
 
 import './user';
-import './message-box';
 
 /** simple */
 
