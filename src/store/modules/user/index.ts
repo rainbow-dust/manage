@@ -55,6 +55,7 @@ const useUserStore = defineStore('user', {
         username: res.username,
         avatar: res.avatar_url,
         accountId: res._id,
+        role: res.role,
       });
     },
 

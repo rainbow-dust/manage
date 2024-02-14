@@ -49,20 +49,6 @@ export function queryContentPeriodAnalysis() {
   return axios.post<GeneralChart>('/api/content-period-analysis');
 }
 
-export interface PublicOpinionAnalysis {
-  quota: string;
-}
-export interface PublicOpinionAnalysisRes {
-  count: number;
-  growth: number;
-  chartData: ChartDataRecord[];
-}
-export function queryPublicOpinionAnalysis(data: DataChainGrowth) {
-  return axios.post<PublicOpinionAnalysisRes>(
-    '/api/public-opinion-analysis',
-    data
-  );
-}
 export interface DataOverviewRes {
   xAxis: string[];
   data: Array<{ name: string; value: number[]; count: number }>;

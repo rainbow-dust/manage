@@ -158,13 +158,63 @@
           <span v-else class="circle pass"></span>
           {{ $t(`searchTable.form.status.${record.status}`) }}
         </template>
-        <template #operations>
+        <template #operations="{ record }">
           <a-button type="text" size="small">
             {{ $t('searchTable.columns.operations.view') }}
           </a-button>
-          <a-button v-permission="['admin']" type="text" size="small">
-            更新
-          </a-button>
+          <a-popover v-permission="['admin']" trigger="click" placement="top">
+            <template #content>
+              <a-button
+                v-if="record.status === 'normal'"
+                type="text"
+                size="small"
+                @click="
+                  async () => {
+                    await blockUser(record._id);
+                    Message.success('封禁成功');
+                    fetchData();
+                  }
+                "
+              >
+                封禁
+              </a-button>
+              <a-button
+                v-else
+                type="text"
+                size="small"
+                @click="
+                  async () => {
+                    await unblockUser(record._id);
+                    Message.success('解封成功');
+                    fetchData();
+                  }
+                "
+              >
+                解封
+              </a-button>
+              <a-button
+                type="text"
+                size="small"
+                @click="
+                  async () => {
+                    await changeRole(
+                      record._id,
+                      record.role === 'admin' ? 'user' : 'admin'
+                    );
+                    Message.success('设置成功');
+                    fetchData();
+                  }
+                "
+              >
+                设为 {{ record.role === 'admin' ? '用户' : '管理员' }}
+              </a-button>
+            </template>
+            <a-button type="text" size="small"> 设置 </a-button>
+          </a-popover>
+
+          <!-- <a-button v-permission="['admin']" type="text" size="small">
+            设置
+          </a-button> -->
         </template>
       </a-table>
     </a-card>
@@ -175,7 +225,14 @@
   import { computed, ref, reactive, watch, nextTick } from 'vue';
   import { useI18n } from 'vue-i18n';
   import useLoading from '@/hooks/loading';
-  import { queryUserList, UserRecord, UserParams } from '@/api/manage-user';
+  import {
+    queryUserList,
+    UserRecord,
+    UserParams,
+    blockUser,
+    unblockUser,
+    changeRole,
+  } from '@/api/manage-user';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type {
@@ -185,6 +242,7 @@
   } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
+  import { Message } from '@arco-design/web-vue';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -250,16 +308,28 @@
       dataIndex: 'username',
     },
     {
-      title: t('searchTable.columns.count'),
-      dataIndex: 'count',
+      title: '角色',
+      dataIndex: 'role',
+    },
+    {
+      title: '文章数',
+      dataIndex: 'note_count',
       sortable: {
         sorter: true,
         sortDirections: ['descend'],
       },
     },
     {
-      title: t('searchTable.columns.createdTime'),
-      dataIndex: 'created_at',
+      title: '被喜欢',
+      dataIndex: 'be_liked_count',
+      sortable: {
+        sorter: true,
+        sortDirections: ['descend'],
+      },
+    },
+    {
+      title: '注册时间',
+      dataIndex: 'created',
     },
     {
       title: t('searchTable.columns.status'),

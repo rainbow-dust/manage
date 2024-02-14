@@ -6,6 +6,7 @@ export interface UserRecord {
   _id: string;
   username: string;
   status: CollectionStatus;
+  role: 'admin' | 'user';
   createdTime: string;
   be_liked_count: number;
   be_collected_count: number;
@@ -30,4 +31,16 @@ export function queryUserList(params: UserParams) {
   return axios.post<UserListRes>('/api/user/admin/query/list', {
     ...params,
   });
+}
+
+export function blockUser(id: string) {
+  return axios.post(`/api/user/admin/block/${id}`);
+}
+
+export function unblockUser(id: string) {
+  return axios.post(`/api/user/admin/unblock/${id}`);
+}
+
+export function changeRole(id: string, role: string) {
+  return axios.post(`/api/user/admin/role/${id}`, { role });
 }
