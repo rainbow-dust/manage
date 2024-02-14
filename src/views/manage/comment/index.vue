@@ -162,7 +162,7 @@
             {{ $t('searchTable.columns.operations.view') }}
           </a-button>
           <a-button v-permission="['admin']" type="text" size="small">
-            更新
+            操作
           </a-button>
         </template>
       </a-table>
@@ -245,12 +245,20 @@
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.content'),
+      title: '内容',
       dataIndex: 'content',
     },
     {
-      title: t('searchTable.columns.count'),
-      dataIndex: 'count',
+      title: '被喜欢',
+      dataIndex: 'like_count',
+    },
+    {
+      title: '子评论数',
+      dataIndex: 'child_comment_count',
+    },
+    {
+      title: '关联文章',
+      dataIndex: 'note_id',
     },
     {
       title: t('searchTable.columns.createdTime'),

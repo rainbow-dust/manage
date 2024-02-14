@@ -78,11 +78,12 @@
           :span="12"
           style="display: flex; align-items: center; justify-content: end"
         >
-          <a-button>
-            <template #icon>
-              <icon-download />
-            </template>
-            {{ $t('searchTable.operation.download') }}
+          <a-button
+            type="primary"
+            style="margin-right: 12px"
+            @click="handleCreate"
+          >
+            {{ '新建' }}
           </a-button>
           <a-tooltip :content="$t('searchTable.actions.refresh')">
             <div class="action-icon" @click="search"
@@ -170,6 +171,29 @@
         </template>
       </a-table>
     </a-card>
+    <a-modal
+      v-model:visible="visible"
+      title="新建"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <a-form
+        :model="form"
+        :label-col-props="{ span: 6 }"
+        :wrapper-col-props="{ span: 18 }"
+        label-align="left"
+      >
+        <a-form-item field="type" :label="'类型'">
+          <a-input v-model="form.type" disabled />
+        </a-form-item>
+        <a-form-item field="topic" :label="'主题'">
+          <a-input v-model="form.topic" />
+        </a-form-item>
+        <a-form-item field="description" :label="'描述'">
+          <a-input v-model="form.description" />
+        </a-form-item>
+      </a-form>
+    </a-modal>
   </div>
 </template>
 
@@ -181,13 +205,41 @@
     queryNoticeList,
     NoticeRecord,
     NoticeParams,
+    NoticeCreateP,
+    createSysNotice,
   } from '@/api/manage-notice';
   import { Pagination } from '@/types/global';
   import type { SelectOptionData } from '@arco-design/web-vue/es/select/interface';
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import cloneDeep from 'lodash/cloneDeep';
   import Sortable from 'sortablejs';
+  import { Message } from '@arco-design/web-vue';
 
+  const form = ref<NoticeCreateP>({
+    type: 'system',
+    topic: '',
+    description: '',
+    is_read: false,
+    from: 'system',
+    to: 'all',
+  });
+
+  const visible = ref(false);
+
+  const handleCreate = () => {
+    visible.value = true;
+  };
+
+  const handleOk = async () => {
+    console.log('form', form.value);
+    await createSysNotice(form.value);
+    Message.success('创建成功');
+    visible.value = false;
+  };
+
+  const handleCancel = () => {
+    visible.value = false;
+  };
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
 
@@ -248,26 +300,21 @@
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.type'),
+      title: '类型',
       dataIndex: 'type',
     },
     {
-      title: t('searchTable.columns.count'),
-      dataIndex: 'count',
+      title: '描述',
+      dataIndex: 'description',
     },
     {
       title: t('searchTable.columns.createdTime'),
-      dataIndex: 'created_at',
+      dataIndex: 'created',
     },
     {
       title: t('searchTable.columns.status'),
-      dataIndex: 'status',
+      dataIndex: 'is_read',
       slotName: 'status',
-    },
-    {
-      title: t('searchTable.columns.operations'),
-      dataIndex: 'operations',
-      slotName: 'operations',
     },
   ]);
 

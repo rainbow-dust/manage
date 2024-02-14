@@ -44,18 +44,6 @@
               </a-col>
               <a-col :span="8">
                 <a-form-item
-                  field="filterType"
-                  :label="$t('searchTable.form.filterType')"
-                >
-                  <a-select
-                    v-model="formModel.filterType"
-                    :options="filterTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
                   field="createdTime"
                   :label="$t('searchTable.form.createdTime')"
                 >
@@ -264,17 +252,24 @@
       dataIndex: 'title',
     },
     {
-      title: t('searchTable.columns.contentType'),
-      dataIndex: 'contentType',
-      slotName: 'contentType',
+      title: '图片数',
+      dataIndex: 'pic_list.length',
     },
     {
-      title: t('searchTable.columns.filterType'),
-      dataIndex: 'filterType',
+      title: '被阅读',
+      dataIndex: 'read_count',
     },
     {
-      title: t('searchTable.columns.count'),
-      dataIndex: 'count',
+      title: '被喜欢',
+      dataIndex: 'like_count',
+    },
+    {
+      title: '被评论',
+      dataIndex: 'comment_count',
+    },
+    {
+      title: '被收藏',
+      dataIndex: 'collect_count',
     },
     {
       title: t('searchTable.columns.createdTime'),
@@ -303,16 +298,6 @@
     {
       label: t('searchTable.form.contentType.verticalVideo'),
       value: 'verticalVideo',
-    },
-  ]);
-  const filterTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('searchTable.form.filterType.artificial'),
-      value: 'artificial',
-    },
-    {
-      label: t('searchTable.form.filterType.rules'),
-      value: 'rules',
     },
   ]);
   const statusOptions = computed<SelectOptionData[]>(() => [
