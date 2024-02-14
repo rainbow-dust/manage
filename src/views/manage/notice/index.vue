@@ -151,7 +151,9 @@
         @page-change="onPageChange"
       >
         <template #index="{ rowIndex }">
-          {{ rowIndex + 1 + (pagination.current - 1) * pagination.pageSize }}
+          {{
+            rowIndex + 1 + (pagination.pageCurrent - 1) * pagination.pageSize
+          }}
         </template>
         <template #status="{ record }">
           <span v-if="record.status === 'offline'" class="circle"></span>
@@ -211,7 +213,7 @@
   const size = ref<SizeProps>('medium');
 
   const basePagination: Pagination = {
-    current: 1,
+    pageCurrent: 1,
     pageSize: 20,
   };
   const pagination = reactive({
@@ -290,7 +292,7 @@
     try {
       const data = await queryNoticeList(params);
       renderData.value = data.list;
-      pagination.current = params.pageCurrent;
+      pagination.pageCurrent = params.pageCurrent;
       pagination.total = data.totalCount;
     } catch (err) {
       // you can report use errorHandler or other
@@ -302,13 +304,13 @@
   const search = () => {
     fetchData({
       // ...basePagination,
-      pageCurrent: basePagination.current,
+      pageCurrent: basePagination.pageCurrent,
       pageSize: basePagination.pageSize,
       ...formModel.value,
     } as unknown as NoticeParams);
   };
-  const onPageChange = (current: number) => {
-    fetchData({ ...basePagination, pageCurrent: current });
+  const onPageChange = (pageCurrent: number) => {
+    fetchData({ ...basePagination, pageCurrent });
   };
 
   fetchData();

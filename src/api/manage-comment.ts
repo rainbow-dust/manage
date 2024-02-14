@@ -1,9 +1,13 @@
 import axios from 'axios';
 
 export interface CommentRecord {
-  id: string;
-  number: number;
-  name: string;
+  _id: string;
+  content: string;
+  like_count: number;
+  post_id: string;
+  created_at: string;
+  child_comment_count?: number;
+  root_comment_id?: string;
 }
 
 export interface CommentParams extends Partial<CommentRecord> {

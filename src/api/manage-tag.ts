@@ -1,9 +1,13 @@
 import axios from 'axios';
 
 export interface TagRecord {
-  id: string;
-  number: number;
+  _id: string;
   name: string;
+  created: string;
+  description: string;
+  heat: number;
+  reference_count: number;
+  cover?: string;
 }
 
 export interface TagParams extends Partial<TagRecord> {
