@@ -1,9 +1,8 @@
-# manage
+# @furina/manage [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rainbow-dust/manage/blob/main/LICENSE)  
 
 ## description
 
-This is a simple app that does nothing.  
-this repo is the front-end part of the rainbow-dust, base on vue, arco-design-pro... building for user interface and management.
+this repo is the front-end part of the furina, base on vue, arco-design-pro... building for user interface and management.
 related projects:
 
 - [app](https://github.com/rainbow-dust/app)
@@ -11,7 +10,16 @@ related projects:
 - [manage](https://github.com/rainbow-dust/manage)
 
 ## features
-## deployment
+
+- dashboard
+  - data statistics and charts overview
+- manage (query/modify/block data)
+  - user
+  - note
+  - comment
+  - tag
+  - notice
+  - log
 
 ## development
 
