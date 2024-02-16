@@ -57,3 +57,8 @@ export interface DataOverviewRes {
 export function queryDataOverview() {
   return axios.post<DataOverviewRes>('/api/statistics/data-overview');
 }
+
+export interface StatisticActionsRes {
+  data: any[];
+  totalCount: number;
+}

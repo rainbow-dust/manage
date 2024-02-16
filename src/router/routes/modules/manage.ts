@@ -68,6 +68,17 @@ const MANAGE: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'log',
+      name: 'Log',
+      component: () => import('@/views/manage/log/index.vue'),
+      meta: {
+        locale: '日志',
+        icon: 'icon-printer',
+        requiresAuth: true,
+        roles: ['*'],
+      },
+    },
   ],
 };
 
