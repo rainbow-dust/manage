@@ -101,33 +101,33 @@ const videoList = [
 ];
 setupMock({
   setup() {
-    Mock.mock(new RegExp('/api/popular/list'), (params: GetParams) => {
-      const { type = 'text' } = qs.parseUrl(params.url).query;
-      if (type === 'image') {
-        return successResponseWrap([...videoList]);
-      }
-      if (type === 'video') {
-        return successResponseWrap([...imageList]);
-      }
-      return successResponseWrap([...textList]);
-    });
+    // Mock.mock(new RegExp('/api/popular/list'), (params: GetParams) => {
+    //   const { type = 'text' } = qs.parseUrl(params.url).query;
+    //   if (type === 'image') {
+    //     return successResponseWrap([...videoList]);
+    //   }
+    //   if (type === 'video') {
+    //     return successResponseWrap([...imageList]);
+    //   }
+    //   return successResponseWrap([...textList]);
+    // });
 
-    Mock.mock(new RegExp('/api/popular-author/list'), () => {
-      const generateData = () => {
-        const list = new Array(7).fill(0).map((_item, index) => ({
-          ranking: index + 1,
-          author: Mock.mock('@ctitle(5)'),
-          contentCount: Mock.mock(/[0-9]{4}/),
-          clickCount: Mock.mock(/[0-9]{4}/),
-        }));
-        return {
-          list,
-        };
-      };
-      return successResponseWrap({
-        ...generateData(),
-      });
-    });
+    // Mock.mock(new RegExp('/api/popular-author/list'), () => {
+    //   const generateData = () => {
+    //     const list = new Array(7).fill(0).map((_item, index) => ({
+    //       ranking: index + 1,
+    //       author: Mock.mock('@ctitle(5)'),
+    //       contentCount: Mock.mock(/[0-9]{4}/),
+    //       clickCount: Mock.mock(/[0-9]{4}/),
+    //     }));
+    //     return {
+    //       list,
+    //     };
+    //   };
+    //   return successResponseWrap({
+    //     ...generateData(),
+    //   });
+    // });
 
     Mock.mock(new RegExp('/api/content-period-analysis'), () => {
       const getLineData = (name: string) => {

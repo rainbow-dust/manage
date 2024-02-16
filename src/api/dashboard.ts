@@ -16,7 +16,10 @@ export interface PopularRecord {
   title: string;
   increases: number;
 }
+export interface PopularNoteRes {
+  list: PopularRecord[];
+}
 
-export function queryPopularList(params: { type: string }) {
-  return axios.get<TableData[]>('/api/popular/list', { params });
+export function queryPopularList() {
+  return axios.post<PopularNoteRes>('/api/statistics/popular-note/list');
 }

@@ -24,25 +24,20 @@ export function queryDataChainGrowth(data: DataChainGrowth) {
 
 export interface PopularAuthorRes {
   list: {
-    ranking: number;
-    author: string;
-    contentCount: number;
-    clickCount: number;
+    user: string;
+    note_count: number;
+    like_count: number;
   }[];
 }
 
 export function queryPopularAuthor() {
-  return axios.get<PopularAuthorRes>('/api/popular-author/list');
+  return axios.post<PopularAuthorRes>('/api/statistics/popular-author/list');
 }
 
 export interface ContentPublishRecord {
   x: string[];
   y: number[];
   name: string;
-}
-
-export function queryContentPublish() {
-  return axios.get<ContentPublishRecord[]>('/api/content-publish');
 }
 
 export function queryContentPeriodAnalysis() {

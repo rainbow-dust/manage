@@ -1,12 +1,7 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '14px' }">
-      <template #title>
-        {{ $t('dataAnalysis.popularAuthor') }}
-      </template>
-      <template #extra>
-        <a-link>{{ $t('workplace.viewMore') }}</a-link>
-      </template>
+      <template #title> 热门作者 </template>
       <a-table
         :data="tableData.list"
         :pagination="false"
@@ -15,27 +10,19 @@
         :scroll="{ x: '100%', y: '350px' }"
       >
         <template #columns>
-          <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.ranking')"
-            data-index="ranking"
-          >
+          <a-table-column :title="'用户'" data-index="user.user">
           </a-table-column>
           <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.author')"
-            data-index="author"
-          >
-          </a-table-column>
-          <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.content')"
-            data-index="contentCount"
+            :title="'作品数'"
+            data-index="note_count"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"
           >
           </a-table-column>
           <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.click')"
-            data-index="clickCount"
+            :title="'被喜欢'"
+            data-index="like_count"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"
