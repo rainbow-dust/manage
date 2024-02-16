@@ -41,7 +41,7 @@ export interface ContentPublishRecord {
 }
 
 export function queryContentPeriodAnalysis() {
-  return axios.post<GeneralChart>('/api/content-period-analysis');
+  return axios.post<GeneralChart>('/api/statistics/period-grouped-notes');
 }
 
 export interface DataOverviewRes {

@@ -1,9 +1,7 @@
 <template>
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '16px' }">
-      <template #title>
-        {{ $t('dataAnalysis.contentPeriodAnalysis') }}
-      </template>
+      <template #title> 内容发布时间分析 </template>
       <Chart style="width: 100%; height: 370px" :option="chartOption" />
     </a-card>
   </a-spin>
@@ -108,7 +106,7 @@
       },
       series: [
         {
-          name: '纯文本',
+          name: '全部',
           data: textChartsData.value,
           type: 'line',
           smooth: true,
@@ -191,12 +189,11 @@
       const chartData = await queryContentPeriodAnalysis();
       xAxis.value = chartData.xAxis;
       chartData.data.forEach((el) => {
-        if (el.name === '纯文本') {
+        if (el.name === '全部') {
           textChartsData.value = el.value;
         } else if (el.name === '图文类') {
           imgChartsData.value = el.value;
         }
-        videoChartsData.value = el.value;
       });
     } catch (err) {
       // you can report use errorHandler or other
