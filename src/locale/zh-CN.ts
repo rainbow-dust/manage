@@ -5,8 +5,6 @@ import localeLogin from '@/views/login/locale/zh-CN';
 import localeCardList from '@/views/system-setting/card/locale/zh-CN';
 import localeStepForm from '@/views/system-setting/step/locale/zh-CN';
 
-import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
-
 import localeMultiDAnalysis from '@/views/dashboard/multi-dimension-data-analysis/locale/zh-CN';
 
 import localeUserSetting from '@/views/user/setting/locale/zh-CN';
@@ -48,7 +46,6 @@ export default {
   /** simple */
   ...localeCardList,
   ...localeStepForm,
-  ...localeBasicProfile,
   ...localeMultiDAnalysis,
   ...localeUserSetting,
   /** simple end */

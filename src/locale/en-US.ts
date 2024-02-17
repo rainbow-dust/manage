@@ -4,7 +4,6 @@ import localeLogin from '@/views/login/locale/en-US';
 import localeCardList from '@/views/system-setting/card/locale/en-US';
 
 import localeStepForm from '@/views/system-setting/step/locale/en-US';
-import localeBasicProfile from '@/views/profile/basic/locale/en-US';
 
 // import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
 
@@ -47,7 +46,6 @@ export default {
   /** simple */
   ...localeCardList,
   ...localeStepForm,
-  ...localeBasicProfile,
   // ...localeMultiDAnalysis,
   ...localeUserSetting,
   /** simple end */
