@@ -23,3 +23,7 @@ export interface PopularNoteRes {
 export function queryPopularList() {
   return axios.post<PopularNoteRes>('/api/statistics/popular-note/list');
 }
+
+export function queryPopularRequestList() {
+  return axios.post<any>('/api/statistics/popular-request/list');
+}

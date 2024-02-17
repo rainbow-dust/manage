@@ -1,14 +1,23 @@
 <template>
-  <a-card
-    class="general-card"
-    :title="$t('multiDAnalysis.card.title.userActions')"
-  >
-    <Chart height="122px" :option="chartOption" />
+  <a-card class="general-card" :title="'接口请求次数'">
+    <Chart height="366px" :option="chartOption" />
   </a-card>
 </template>
 
 <script lang="ts" setup>
+  import { computed, ref } from 'vue';
+
   import useChartOption from '@/hooks/chart-option';
+  import { queryPopularRequestList } from '@/api/dashboard';
+
+  const contentData = ref();
+
+  const fetchData = async () => {
+    const res = await queryPopularRequestList();
+    contentData.value = res;
+  };
+
+  fetchData();
 
   const { chartOption } = useChartOption((isDark) => {
     return {
@@ -35,7 +44,7 @@
       },
       yAxis: {
         type: 'category',
-        data: ['点赞量', '评论量', '分享量'],
+        data: contentData.value?.list.map((item: any) => item.url),
         axisLabel: {
           show: true,
           color: '#4E5969',
@@ -60,7 +69,7 @@
       },
       series: [
         {
-          data: [1033, 1244, 1520],
+          data: contentData.value?.list.map((item: any) => item.count),
           type: 'bar',
           barWidth: 7,
           itemStyle: {

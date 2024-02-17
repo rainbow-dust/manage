@@ -15,12 +15,26 @@
         </a-grid-item>
         <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 6, xl: 6, xxl: 6 }">
           <UserActions style="margin-bottom: 16px" />
-          <ContentTypeDistribution />
         </a-grid-item>
       </a-grid>
-      <PopularAuthor />
       <ContentPeriodAnalysis />
-      <PopularContent />
+      <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 24, xxl: 24 }">
+        <a-divider />
+      </a-grid-item>
+      <a-space direction="horizontal" :size="16" wrap>
+        <a-grid :cols="24" :col-gap="16" :row-gap="16">
+          <a-grid-item
+            :span="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }"
+          >
+            <PopularAuthor />
+          </a-grid-item>
+          <a-grid-item
+            :span="{ xs: 24, sm: 24, md: 24, lg: 12, xl: 12, xxl: 12 }"
+          >
+            <PopularContent />
+          </a-grid-item>
+        </a-grid>
+      </a-space>
     </a-space>
   </div>
 </template>

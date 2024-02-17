@@ -42,6 +42,11 @@
   import useThemes from '@/hooks/themes';
   import useChartOption from '@/hooks/chart-option';
 
+  const contentProductionData = ref<number[]>([]);
+  const contentClickData = ref<number[]>([]);
+  const contentExposureData = ref<number[]>([]);
+  const activeUsersData = ref<number[]>([]);
+
   const tooltipItemsHtmlString = (items: ToolTipFormatterParams[]) => {
     return items
       .map(
@@ -100,7 +105,7 @@
   const renderData = computed(() => [
     {
       title: t('multiDAnalysis.dataOverview.contentProduction'),
-      value: 1902,
+      value: contentProductionData.value.reduce((prev, curr) => prev + curr, 0),
       prefix: {
         icon: 'icon-edit',
         background: isDark.value ? '#593E2F' : '#FFE4BA',
@@ -109,7 +114,7 @@
     },
     {
       title: t('multiDAnalysis.dataOverview.contentClick'),
-      value: 2445,
+      value: contentClickData.value.reduce((prev, curr) => prev + curr, 0),
       prefix: {
         icon: 'icon-thumb-up',
         background: isDark.value ? '#3D5A62' : '#E8FFFB',
@@ -118,7 +123,7 @@
     },
     {
       title: t('multiDAnalysis.dataOverview.contentExposure'),
-      value: 3034,
+      value: contentExposureData.value.reduce((prev, curr) => prev + curr, 0),
       prefix: {
         icon: 'icon-heart',
         background: isDark.value ? '#354276' : '#E8F3FF',
@@ -127,7 +132,7 @@
     },
     {
       title: t('multiDAnalysis.dataOverview.activeUsers'),
-      value: 1275,
+      value: activeUsersData.value.reduce((prev, curr) => prev + curr, 0),
       prefix: {
         icon: 'icon-user',
         background: isDark.value ? '#3F385E' : '#F5E8FF',
@@ -136,10 +141,6 @@
     },
   ]);
   const xAxis = ref<string[]>([]);
-  const contentProductionData = ref<number[]>([]);
-  const contentClickData = ref<number[]>([]);
-  const contentExposureData = ref<number[]>([]);
-  const activeUsersData = ref<number[]>([]);
   const { chartOption } = useChartOption((dark) => {
     return {
       grid: {
