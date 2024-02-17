@@ -8,10 +8,6 @@ import localeBasicProfile from '@/views/profile/basic/locale/en-US';
 
 // import localeMultiDAnalysis from '@/views/visualization/multi-dimension-data-analysis/locale/en-US';
 
-import locale403 from '@/views/exception/403/locale/en-US';
-import locale404 from '@/views/exception/404/locale/en-US';
-import locale500 from '@/views/exception/500/locale/en-US';
-
 import localeUserSetting from '@/views/user/setting/locale/en-US';
 /** simple end */
 
@@ -53,9 +49,6 @@ export default {
   ...localeStepForm,
   ...localeBasicProfile,
   // ...localeMultiDAnalysis,
-  ...locale403,
-  ...locale404,
-  ...locale500,
   ...localeUserSetting,
   /** simple end */
 };

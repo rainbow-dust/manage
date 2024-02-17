@@ -9,10 +9,6 @@ import localeBasicProfile from '@/views/profile/basic/locale/zh-CN';
 
 import localeMultiDAnalysis from '@/views/dashboard/multi-dimension-data-analysis/locale/zh-CN';
 
-import locale403 from '@/views/exception/403/locale/zh-CN';
-import locale404 from '@/views/exception/404/locale/zh-CN';
-import locale500 from '@/views/exception/500/locale/zh-CN';
-
 import localeUserSetting from '@/views/user/setting/locale/zh-CN';
 /** simple end */
 
@@ -54,9 +50,6 @@ export default {
   ...localeStepForm,
   ...localeBasicProfile,
   ...localeMultiDAnalysis,
-  ...locale403,
-  ...locale404,
-  ...locale500,
   ...localeUserSetting,
   /** simple end */
 };

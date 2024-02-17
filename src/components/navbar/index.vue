@@ -122,33 +122,25 @@
             <a-doption>
               <a-space @click="switchRoles">
                 <icon-tag />
-                <span>
-                  {{ $t('messageBox.switchRoles') }}
-                </span>
+                <span> 转换角色 </span>
               </a-space>
             </a-doption>
             <a-doption>
               <a-space @click="$router.push({ name: 'Info' })">
                 <icon-user />
-                <span>
-                  {{ $t('messageBox.userCenter') }}
-                </span>
+                <span> 用户中心 </span>
               </a-space>
             </a-doption>
             <a-doption>
               <a-space @click="$router.push({ name: 'Setting' })">
                 <icon-settings />
-                <span>
-                  {{ $t('messageBox.userSettings') }}
-                </span>
+                <span> 用户设置 </span>
               </a-space>
             </a-doption>
             <a-doption>
               <a-space @click="handleLogout">
                 <icon-export />
-                <span>
-                  {{ $t('messageBox.logout') }}
-                </span>
+                <span> 退出登录 </span>
               </a-space>
             </a-doption>
           </template>
