@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['通知管理', '列表']" />
+    <a-card class="general-card" :title="'通知列表'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,7 +12,7 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item field="_id" :label="$t('searchTable.form.number')">
+                <a-form-item field="_id" :label="'编号'">
                   <a-input
                     v-model="formModel._id"
                     :placeholder="$t('searchTable.form.number.placeholder')"
@@ -20,10 +20,10 @@
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="type" :label="$t('searchTable.form.type')">
+                <a-form-item field="type" :label="'类型'">
                   <a-input
                     v-model="formModel.type"
-                    :placeholder="$t('searchTable.form.type.placeholder')"
+                    :placeholder="'请输入类型'"
                   />
                 </a-form-item>
               </a-col>
@@ -35,18 +35,6 @@
                   <a-range-picker
                     v-model="formModel.createdTime"
                     style="width: 100%"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
-                  field="status"
-                  :label="$t('searchTable.form.status')"
-                >
-                  <a-select
-                    v-model="formModel.status"
-                    :options="statusOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
                   />
                 </a-form-item>
               </a-col>
@@ -157,9 +145,9 @@
           }}
         </template>
         <template #status="{ record }">
-          <span v-if="record.status === 'offline'" class="circle"></span>
+          <span v-if="record.is_read === false" class="circle"></span>
           <span v-else class="circle pass"></span>
-          {{ $t(`searchTable.form.status.${record.status}`) }}
+          {{ record.is_read === false ? '未读' : '已读' }}
         </template>
         <template #operations>
           <a-button type="text" size="small">
@@ -231,7 +219,6 @@
   };
 
   const handleOk = async () => {
-    console.log('form', form.value);
     await createSysNotice(form.value);
     Message.success('创建成功');
     visible.value = false;
@@ -252,7 +239,7 @@
       contentType: '',
       filterType: '',
       createdTime: [],
-      status: '',
+      is_read: false,
     };
   };
   const { loading, setLoading } = useLoading(true);
@@ -318,18 +305,14 @@
     },
   ]);
 
-  const statusOptions = computed<SelectOptionData[]>(() => [
+  const statusOptions = computed(() => [
     {
-      label: t('searchTable.form.status.normal'),
-      value: 'normal',
+      label: '已读',
+      value: true,
     },
     {
-      label: t('searchTable.form.status.deleted'),
-      value: 'abnormal',
-    },
-    {
-      label: t('searchTable.form.status.blocked'),
-      value: 'blocked',
+      label: '未读',
+      value: false,
     },
   ]);
   const fetchData = async (

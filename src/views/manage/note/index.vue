@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['内容管理', '列表']" />
+    <a-card class="general-card" :title="'内容列表'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,33 +12,18 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item
-                  field="number"
-                  :label="$t('searchTable.form.number')"
-                >
+                <a-form-item field="number" :label="'编号'">
                   <a-input
                     v-model="formModel.number"
-                    :placeholder="$t('searchTable.form.number.placeholder')"
+                    :placeholder="'请输入编号'"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="name" :label="$t('searchTable.form.name')">
+                <a-form-item field="title" :label="'标题'">
                   <a-input
-                    v-model="formModel.name"
-                    :placeholder="$t('searchTable.form.name.placeholder')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
-                  field="contentType"
-                  :label="$t('searchTable.form.contentType')"
-                >
-                  <a-select
-                    v-model="formModel.contentType"
-                    :options="contentTypeOptions"
-                    :placeholder="$t('searchTable.form.selectDefault')"
+                    v-model="formModel.title"
+                    :placeholder="'请输入标题'"
                   />
                 </a-form-item>
               </a-col>
@@ -196,8 +181,7 @@
   const generateFormModel = () => {
     return {
       number: '',
-      name: '',
-      contentType: '',
+      title: '',
       filterType: '',
       createdTime: [],
       status: '',
@@ -244,11 +228,11 @@
       slotName: 'index',
     },
     {
-      title: t('searchTable.columns.number'),
+      title: '内容id',
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.name'),
+      title: '内容标题',
       dataIndex: 'title',
     },
     {
@@ -284,20 +268,6 @@
       title: t('searchTable.columns.operations'),
       dataIndex: 'operations',
       slotName: 'operations',
-    },
-  ]);
-  const contentTypeOptions = computed<SelectOptionData[]>(() => [
-    {
-      label: t('searchTable.form.contentType.img'),
-      value: 'img',
-    },
-    {
-      label: t('searchTable.form.contentType.horizontalVideo'),
-      value: 'horizontalVideo',
-    },
-    {
-      label: t('searchTable.form.contentType.verticalVideo'),
-      value: 'verticalVideo',
     },
   ]);
   const statusOptions = computed<SelectOptionData[]>(() => [

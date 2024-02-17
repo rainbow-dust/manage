@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['管理', '日志']" />
+    <a-card class="general-card" :title="'日志列表'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,21 +12,10 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item field="_id" :label="$t('searchTable.form.number')">
+                <a-form-item field="_id" :label="'ID'">
                   <a-input
                     v-model="formModel._id"
                     :placeholder="$t('searchTable.form.number.placeholder')"
-                  />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item
-                  field="content"
-                  :label="$t('searchTable.form.content')"
-                >
-                  <a-input
-                    v-model="formModel.content"
-                    :placeholder="$t('searchTable.form.content.placeholder')"
                   />
                 </a-form-item>
               </a-col>
@@ -215,7 +204,7 @@
       slotName: 'index',
     },
     {
-      title: t('searchTable.columns.number'),
+      title: 'ID',
       dataIndex: '_id',
     },
     {

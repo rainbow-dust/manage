@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['用户管理', '列表']" />
+    <a-card class="general-card" :title="'用户管理'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,21 +12,18 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item field="_id" :label="$t('searchTable.form.number')">
+                <a-form-item field="_id" :label="'用户id'">
                   <a-input
                     v-model="formModel._id"
-                    :placeholder="$t('searchTable.form.number.placeholder')"
+                    :placeholder="'请输入用户id'"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="username"
-                  :label="$t('searchTable.form.name')"
-                >
+                <a-form-item field="username" :label="'用户名'">
                   <a-input
                     v-model="formModel.username"
-                    :placeholder="$t('searchTable.form.name.placeholder')"
+                    :placeholder="'请输入用户名'"
                   />
                 </a-form-item>
               </a-col>
@@ -300,11 +297,11 @@
       slotName: 'index',
     },
     {
-      title: t('searchTable.columns.number'),
+      title: '用户id',
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.name'),
+      title: '用户名',
       dataIndex: 'username',
     },
     {

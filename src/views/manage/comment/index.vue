@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['评论管理', '评论列表']" />
+    <a-card class="general-card" :title="'评论列表'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,21 +12,18 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item field="_id" :label="$t('searchTable.form.number')">
+                <a-form-item field="_id" :label="'评论ID'">
                   <a-input
                     v-model="formModel._id"
-                    :placeholder="$t('searchTable.form.number.placeholder')"
+                    :placeholder="'请输入评论ID'"
                   />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item
-                  field="content"
-                  :label="$t('searchTable.form.content')"
-                >
+                <a-form-item field="content" :label="'评论内容'">
                   <a-input
                     v-model="formModel.content"
-                    :placeholder="$t('searchTable.form.content.placeholder')"
+                    :placeholder="'请输入评论内容'"
                   />
                 </a-form-item>
               </a-col>
@@ -241,7 +238,7 @@
       slotName: 'index',
     },
     {
-      title: t('searchTable.columns.number'),
+      title: '评论ID',
       dataIndex: '_id',
     },
     {

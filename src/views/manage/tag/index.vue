@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.list', 'menu.list.searchTable']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+    <Breadcrumb :items="['标签管理', '列表']" />
+    <a-card class="general-card" :title="'标签列表'">
       <a-row>
         <a-col :flex="1">
           <a-form
@@ -12,19 +12,13 @@
           >
             <a-row :gutter="16">
               <a-col :span="8">
-                <a-form-item field="_id" :label="$t('searchTable.form.number')">
-                  <a-input
-                    v-model="formModel._id"
-                    :placeholder="$t('searchTable.form.number.placeholder')"
-                  />
+                <a-form-item field="_id" :label="'标签编号'">
+                  <a-input v-model="formModel._id" :placeholder="'标签编号'" />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
-                <a-form-item field="name" :label="$t('searchTable.form.name')">
-                  <a-input
-                    v-model="formModel.name"
-                    :placeholder="$t('searchTable.form.name.placeholder')"
-                  />
+                <a-form-item field="name" :label="'标签名称'">
+                  <a-input v-model="formModel.name" :placeholder="'标签名称'" />
                 </a-form-item>
               </a-col>
               <a-col :span="8">
@@ -164,12 +158,7 @@
           <a-button type="text" size="small">
             {{ $t('searchTable.columns.operations.view') }}
           </a-button>
-          <a-button
-            v-permission="['admin']"
-            type="text"
-            size="small"
-            @click="handleTagEdit(record)"
-          >
+          <a-button type="text" size="small" @click="handleTagEdit(record)">
             编辑
           </a-button>
         </template>
@@ -183,7 +172,7 @@
         :wrapper-col-props="{ span: 18 }"
         label-align="left"
       >
-        <a-form-item field="name" :label="t('searchTable.form.name')">
+        <a-form-item field="name" :label="'标签名称'">
           <a-input
             v-model="editFormModel.name"
             :placeholder="t('searchTable.form.name.placeholder')"
@@ -304,11 +293,11 @@
       slotName: 'index',
     },
     {
-      title: t('searchTable.columns.number'),
+      title: '标签编号',
       dataIndex: '_id',
     },
     {
-      title: t('searchTable.columns.name'),
+      title: '标签名称',
       dataIndex: 'name',
     },
     {
