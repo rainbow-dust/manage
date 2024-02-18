@@ -265,7 +265,6 @@
     setLoading(true);
     try {
       const data = await queryDataOverview();
-      console.log(data);
       xAxis.value = data.xAxis;
       data.data.forEach((el) => {
         if (el.name === '文章数') {
@@ -280,7 +279,6 @@
       });
     } catch (err) {
       // you can report use errorHandler or other
-      console.error(err);
     } finally {
       setLoading(false);
     }

@@ -1,5 +1,8 @@
 # @furina/manage [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/rainbow-dust/manage/blob/main/LICENSE)  
 
+[![build status](https://github.com/rainbow-dust/manage/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/rainbow-dust/manage/actions/workflows/build.yml)
+
+
 ## description
 
 this repo is the front-end part of the furina, base on vue, arco-design-pro... building for user interface and management.
