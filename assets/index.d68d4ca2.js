@@ -1,0 +1,1 @@
+import{_ as o}from"./index.140309e9.js";import{B as t,aD as _,aG as a,aL as s,bc as c}from"./arco.bbdacfc8.js";const u="/assets/logo.933a286e.png";const n={};function r(p,d){const e=c;return t(),_(e,{class:"footer"},{default:a(()=>[s("FuFu")]),_:1})}const l=o(n,[["render",r],["__scopeId","data-v-cb87e3a6"]]);export{l as F,u as _};
